@@ -1,0 +1,25 @@
+<!--<ul class="app-tree-ul">-->
+<!--<li style="background-color: rebeccapurple" *ngFor="let item of treelists">-->
+<!--<div class="title" (click)="itemClick(item)">{{item.title}}</div>-->
+<!--&lt;!&ndash;调用组件本身并 传值给下级: [treelists]="item.items"&ndash;&gt;-->
+<!--<app-tree *ngIf="item.open && item.items && item.items.length" [treelists]="item.items"></app-tree>-->
+<!--</li>-->
+<!--</ul>-->
+<div style="width: 600px">
+  <div *ngFor="let item of treelists">
+    <div [ngClass]="item.subTitle ? 'subTitle' : 'title'" (click)="itemClick(item)">
+      <!--一级标题-->
+      <div *ngIf="!item.subTitle"><i class="icon-prev">+</i>{{item.title}}</div>
+      <!--二级标题-->
+      <div *ngIf="item.subTitle">
+        <span>{{item.title}}</span>
+        <div style="float: right">
+          <button (click)="$event.stopPropagation();editClick(item)">修改</button>
+          <button>删除</button>
+        </div>
+      </div>
+    </div>
+    <!--循环展示-->
+    <app-tree *ngIf="item.open && item.items && item.items.length" [treelists]="item.items"></app-tree>
+  </div>
+</div>
